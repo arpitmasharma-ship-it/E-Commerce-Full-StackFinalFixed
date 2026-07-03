@@ -14,6 +14,9 @@ import Orders from './pages/Orders'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
+// import CursorGlow from "./components/CursorGlow";
+import FloatingGradient from "./components/FloatingGradient";
+import SmoothScroll from "./components/SmoothScroll";
 
 ////////////////////////////////////////////////////////////
   import { ToastContainer, toast } from 'react-toastify';
@@ -23,11 +26,18 @@ import SearchBar from './components/SearchBar'
 
 const App = () => {  /* 👉 Yeh pura app ka layout define karta hai */  /* 👉 Global notification system enable karta hai */
   return (
-   <div  className='px-4 sm:px-[5vw] md:px-[7vw]  lg:px-[9vw] '  > 
-   <ToastContainer/>  {/* 👉 Notification system (error/success messages) */}
+   <div className='relative px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
 
-   <Navbar/>
-   <SearchBar/>
+  <FloatingGradient />
+
+  {/* <CursorGlow /> */}
+
+  <ToastContainer />
+
+  <Navbar />
+    <SmoothScroll />
+
+  <SearchBar />
 
    <Routes>
 
