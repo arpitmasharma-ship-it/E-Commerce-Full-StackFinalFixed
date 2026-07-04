@@ -119,30 +119,30 @@
 // export default Navbar
 
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const [visible, setVisible] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const {
-    showSearch,
-    setShowSearch,
     getCartCount,
     token,
     setToken,
     setCartItems,
+    showSearch,
+    setShowSearch,
   } = useContext(ShopContext);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -157,228 +157,196 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const navClass = ({ isActive }) =>
-    `relative transition duration-300 hover:text-white ${
-      isActive ? "text-white" : "text-gray-300"
-    }`;
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "Collection", path: "/collection" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <>
-      <motion.header
+      <motion.nav
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.7 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`sticky top-0 z-50 transition-all duration-500
+        ${
           scrolled
-            ? "bg-black/70 backdrop-blur-2xl border-b border-white/10 shadow-2xl"
+            ? "backdrop-blur-2xl bg-white/70 shadow-xl"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
 
-          <div className="flex h-20 items-center justify-between">
+          <Link to="/">
+                  <h1
+  className="
+    text-4xl md:text-5xl
+    font-extrabold
+    tracking-tight
+    bg-gradient-to-r
+    from-yellow-300
+    via-yellow-500
+    to-amber-300
+    bg-clip-text
+    text-transparent
+    drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]
+    hover:scale-105
+    transition-all
+    duration-500
+    cursor-pointer
+    animate-pulse
+  "
+>
+  <span className="font-black">AS</span>
+  <span className="text-white">Prime</span>
+</h1>
+          </Link>
 
-            {/* Logo */}
+          <ul className="hidden lg:flex gap-10 font-medium">
 
-            <Link to="/">
-              <h1 className="text-4xl font-black tracking-[6px] text-white">
-                AKS
-              </h1>
-            </Link>
-
-            {/* Desktop Menu */}
-
-            <nav className="hidden lg:flex items-center gap-10">
-
-              <NavLink to="/" className={navClass}>
-                Home
-              </NavLink>
-
-              <NavLink to="/collection" className={navClass}>
-                Collection
-              </NavLink>
-
-              <NavLink to="/about" className={navClass}>
-                About
-              </NavLink>
-
-              <NavLink to="/contact" className={navClass}>
-                Contact
-              </NavLink>
-
-            </nav>
-
-            {/* Right */}
-
-            <div className="flex items-center gap-6">
-
-              <motion.img
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
-                src={assets.search_icon}
-                onClick={() => setShowSearch(!showSearch)}
-                className="w-5 cursor-pointer invert"
-                alt=""
-              />
-
-              <div className="relative group">
-
-                <img
-                  src={assets.profile_icon}
-                  className="w-5 cursor-pointer invert"
-                  alt=""
-                />
-
-                <div className="absolute hidden group-hover:block right-0 pt-5">
-
-                  <div className="rounded-3xl bg-zinc-900/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden min-w-[190px]">
-
-                    {token ? (
-                      <>
-                        <button className="w-full text-left px-6 py-4 hover:bg-white hover:text-black transition">
-                          My Profile
-                        </button>
-
-                        <button
-                          onClick={() => navigate("/orders")}
-                          className="w-full text-left px-6 py-4 hover:bg-white hover:text-black transition"
-                        >
-                          Orders
-                        </button>
-
-                        <button
-                          onClick={logout}
-                          className="w-full text-left px-6 py-4 hover:bg-red-500 transition"
-                        >
-                          Logout
-                        </button>
-                      </>
-                    ) : (
-                      <button
-                        onClick={() => navigate("/login")}
-                        className="w-full text-left px-6 py-4 hover:bg-white hover:text-black transition"
-                      >
-                        Login
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <Link className="relative" to="/cart">
-
-                <motion.img
-                  whileHover={{ scale: 1.15 }}
-                  src={assets.cart_icon}
-                  className="w-5 invert"
-                />
-
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 bg-white text-black rounded-full text-[10px] w-5 h-5 flex items-center justify-center font-bold"
-                >
-                  {getCartCount()}
-                </motion.span>
-
-              </Link>
-
-              <button
-                className="hidden lg:block px-6 py-3 rounded-full bg-white text-black font-semibold hover:scale-105 transition"
-                onClick={() => navigate("/collection")}
+            {links.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `relative transition ${
+                    isActive ? "text-black" : "text-gray-500"
+                  } hover:text-black`
+                }
               >
-                Shop Now
-              </button>
+                {item.name}
 
-              {/* Mobile */}
+                <span className="absolute left-0 -bottom-2 h-[2px] bg-black w-0 hover:w-full transition-all duration-300"></span>
+
+              </NavLink>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-5">
+
+            <img
+              src={assets.search_icon}
+              onClick={() => setShowSearch(!showSearch)}
+              className="w-5 cursor-pointer hover:scale-110 transition"
+            />
+
+            <div className="relative group">
 
               <img
-                src={assets.menu_icon}
-                className="w-6 invert lg:hidden cursor-pointer"
-                onClick={() => setVisible(true)}
-                alt=""
+                src={assets.profile_icon}
+                className="w-5 cursor-pointer"
               />
 
-            </div>
-          </div>
-        </div>
-      </motion.header>
+              <div className="absolute hidden group-hover:block right-0 pt-4">
 
-      {/* Mobile Drawer */}
+                <div className="rounded-3xl bg-white shadow-2xl p-5 w-52">
+
+                  {!token ? (
+                    <p
+                      onClick={() => navigate("/login")}
+                      className="cursor-pointer hover:text-black text-gray-500"
+                    >
+                      Login
+                    </p>
+                  ) : (
+                    <>
+                      <p className="cursor-pointer hover:text-black text-gray-500">
+                        My Profile
+                      </p>
+
+                      <p
+                        onClick={() => navigate("/orders")}
+                        className="mt-3 cursor-pointer hover:text-black text-gray-500"
+                      >
+                        Orders
+                      </p>
+
+                      <p
+                        onClick={logout}
+                        className="mt-3 cursor-pointer hover:text-black text-gray-500"
+                      >
+                        Logout
+                      </p>
+                    </>
+                  )}
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <Link to="/cart" className="relative">
+
+              <img
+                src={assets.cart_icon}
+                className="w-5"
+              />
+
+              <span className="absolute -right-2 -bottom-2 h-5 w-5 rounded-full bg-black text-white text-[10px] flex items-center justify-center">
+                {getCartCount()}
+              </span>
+
+            </Link>
+
+            <button
+              className="lg:hidden"
+              onClick={() => setMenuOpen(true)}
+            >
+              <img
+                src={assets.menu_icon}
+                className="w-6"
+              />
+            </button>
+
+          </div>
+
+        </div>
+      </motion.nav>
 
       <AnimatePresence>
 
-        {visible && (
-
+        {menuOpen && (
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ duration: .4 }}
-            className="fixed inset-0 bg-black z-[100]"
+            transition={{ duration: 0.45 }}
+            className="fixed inset-0 bg-black text-white z-[100]"
           >
 
-            <div className="flex justify-between items-center p-6 border-b border-white/10">
+            <div className="flex justify-between items-center p-7">
 
-              <h2 className="text-3xl font-bold text-white">
-                MENU
+              <h2 className="text-3xl font-bold">
+                Menu
               </h2>
 
-              <button
-                onClick={() => setVisible(false)}
-                className="text-white text-3xl"
-              >
+              <button onClick={() => setMenuOpen(false)}>
                 ✕
               </button>
 
             </div>
 
-            <div className="flex flex-col mt-10 text-2xl">
+            <div className="flex flex-col mt-10">
 
-              <NavLink
-                onClick={() => setVisible(false)}
-                className="px-8 py-6 border-b border-white/10 text-white"
-                to="/"
-              >
-                Home
-              </NavLink>
-
-              <NavLink
-                onClick={() => setVisible(false)}
-                className="px-8 py-6 border-b border-white/10 text-white"
-                to="/collection"
-              >
-                Collection
-              </NavLink>
-
-              <NavLink
-                onClick={() => setVisible(false)}
-                className="px-8 py-6 border-b border-white/10 text-white"
-                to="/about"
-              >
-                About
-              </NavLink>
-
-              <NavLink
-                onClick={() => setVisible(false)}
-                className="px-8 py-6 border-b border-white/10 text-white"
-                to="/contact"
-              >
-                Contact
-              </NavLink>
+              {links.map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-4xl font-bold px-8 py-6 border-b border-white/10"
+                >
+                  {item.name}
+                </NavLink>
+              ))}
 
             </div>
 
           </motion.div>
-
         )}
 
       </AnimatePresence>
-
-      {/* Spacer */}
-
-      <div className="h-20"></div>
-
     </>
   );
 };

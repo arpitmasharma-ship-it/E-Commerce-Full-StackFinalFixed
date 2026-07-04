@@ -48,36 +48,54 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="mt-32 rounded-[40px] overflow-hidden bg-zinc-950 text-white">
+<footer className="mt-16 rounded-[32px] overflow-hidden bg-zinc-950 text-white">
 
-      <div className="max-w-7xl mx-auto px-8 py-20">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-12 sm:py-14">
 
-        <div className="grid lg:grid-cols-4 gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
 
           {/* Brand */}
 
           <div className="lg:col-span-2">
+                 
+             
 
-            <motion.img
-              whileHover={{ scale: 1.05 }}
-              src={assets.logo}
-              className="w-36 invert"
-              alt=""
-            />
-
-            <p className="mt-8 text-zinc-400 leading-8 max-w-lg">
+          <h1
+  className="
+    text-4xl md:text-5xl
+    font-extrabold
+    tracking-tight
+    bg-gradient-to-r
+    from-yellow-300
+    via-yellow-500
+    to-amber-300
+    bg-clip-text
+    text-transparent
+    drop-shadow-[0_0_20px_rgba(255,215,0,0.5)]
+    hover:scale-105
+    transition-all
+    duration-500
+    cursor-pointer
+    animate-pulse
+  "
+>
+  <span className="font-black">AS</span>
+  <span className="text-white">Prime</span>
+</h1>
+            
+            <p className="mt-5 text-sm text-zinc-400 leading-7 max-w-md" >
               Elevating everyday fashion through timeless silhouettes,
               premium fabrics, and exceptional craftsmanship.
               Designed for people who appreciate luxury and simplicity.
             </p>
 
-            <div className="flex gap-4 mt-10">
+            <div  className="flex flex-wrap gap-3 mt-6" >
 
               {["Instagram", "Twitter", "Pinterest"].map((item) => (
                 <motion.button
                   key={item}
                   whileHover={{ y: -6 }}
-                  className="rounded-full border border-white/10 px-5 py-3 hover:bg-white hover:text-black transition"
+               className="rounded-full border border-white/10 px-4 py-2 text-sm hover:bg-white hover:text-black transition"
                 >
                   {item}
                 </motion.button>
@@ -87,65 +105,75 @@ const Footer = () => {
 
           </div>
 
-          {/* Company */}
+        {/* Company + Contact */}
 
-          <div>
+<div className="lg:col-span-2">
 
-            <h3 className="text-xl font-bold mb-8">
-              Company
-            </h3>
+  <div className="grid grid-cols-2 gap-8">
 
-            <ul className="space-y-5 text-zinc-400">
+    {/* Company */}
 
-              <li className="hover:text-white transition cursor-pointer">
-                Home
-              </li>
+    <div>
 
-              <li className="hover:text-white transition cursor-pointer">
-                Collection
-              </li>
+      <h3 className="text-lg font-bold mb-4">
+        Company
+      </h3>
 
-              <li className="hover:text-white transition cursor-pointer">
-                About
-              </li>
+      <ul className="space-y-3 text-sm text-zinc-400">
 
-              <li className="hover:text-white transition cursor-pointer">
-                Contact
-              </li>
+        <li className="hover:text-white transition cursor-pointer">
+          Home
+        </li>
 
-            </ul>
+        <li className="hover:text-white transition cursor-pointer">
+          Collection
+        </li>
 
-          </div>
+        <li className="hover:text-white transition cursor-pointer">
+          About
+        </li>
 
-          {/* Contact */}
+        <li className="hover:text-white transition cursor-pointer">
+          Contact
+        </li>
 
-          <div>
+      </ul>
 
-            <h3 className="text-xl font-bold mb-8">
-              Contact
-            </h3>
+    </div>
 
-            <ul className="space-y-5 text-zinc-400">
+    {/* Contact */}
 
-              <li>+91 9784839250</li>
+    <div>
 
-              <li>arpitgoat@gmail.com</li>
+      <h3 className="text-lg font-bold mb-4">
+        Contact
+      </h3>
 
-              <li>Jaipur, Rajasthan</li>
+      <ul className="space-y-3 text-sm text-zinc-400">
 
-            </ul>
+        <li>+91 9784839250</li>
 
-          </div>
+        <li>arpitGOAT@gmail.com</li>
+
+        <li>Jaipur, Rajasthan</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
 
         </div>
 
-        <div className="border-t border-white/10 mt-20 pt-8 flex flex-col md:flex-row justify-between items-center">
+       <div className="border-t border-white/10 mt-10 pt-5 flex flex-col sm:flex-row justify-between items-center gap-4">
 
-          <p className="text-zinc-500">
+          <p className="text-xs sm:text-sm text-zinc-500" >
             © 2026 AKS Luxury. All rights reserved.
           </p>
 
-          <div className="flex gap-8 mt-6 md:mt-0 text-zinc-500">
+          <div className="flex gap-5 text-xs sm:text-sm text-zinc-500" >
 
             <span className="hover:text-white cursor-pointer transition">
               Privacy

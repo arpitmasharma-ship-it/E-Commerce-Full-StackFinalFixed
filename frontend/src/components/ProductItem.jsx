@@ -34,38 +34,89 @@ const ProductItem = ({ id, image, name, price }) => {
 
   return (
     <motion.div
-      whileHover={{ y: -12 }}
+      whileHover={{ y: -8 }}
       transition={{ duration: 0.35 }}
       className="group"
     >
       <Link
         to={`/product/${id}`}
-        className="block overflow-hidden rounded-[28px] bg-white shadow-sm hover:shadow-2xl transition-all duration-500"
+        className="
+        block
+        overflow-hidden
+        rounded-3xl
+        bg-white
+        shadow-md
+        hover:shadow-2xl
+        transition-all
+        duration-500
+        "
       >
-        {/* Image */}
+        {/* IMAGE */}
 
-        <div className="relative overflow-hidden bg-zinc-100">
+        <div className="relative bg-zinc-100 overflow-hidden rounded-t-3xl">
 
           <motion.img
-            whileHover={{ scale: 1.08 }}
-            transition={{ duration: .6 }}
             src={image[0]}
             alt={name}
-            className="w-full h-[340px] object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.6 }}
+            className="
+              w-full
+              h-56
+              sm:h-64
+              md:h-72
+              object-contain
+              p-3
+              transition-all
+              duration-700
+            "
           />
 
-          {/* Badge */}
+          {/* NEW Badge */}
 
-          <span className="absolute top-5 left-5 px-4 py-2 rounded-full bg-white/80 backdrop-blur-xl text-xs font-semibold tracking-widest">
+          <div className="
+          absolute
+          top-3
+          left-3
+          px-4
+          py-2
+          rounded-full
+          bg-white/90
+          backdrop-blur-xl
+          shadow-lg
+          text-[11px]
+          font-bold
+          tracking-[3px]
+          ">
+
             NEW
-          </span>
+
+          </div>
 
           {/* Quick View */}
 
-          <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition duration-500">
+          <div className="
+          absolute
+          bottom-0
+          left-0
+          w-full
+          translate-y-full
+          group-hover:translate-y-0
+          transition-all
+          duration-500
+          ">
 
             <button
-              className="w-full bg-black text-white py-4 tracking-widest uppercase text-sm hover:bg-zinc-800 transition"
+              className="
+              w-full
+              bg-black/90
+              backdrop-blur-xl
+              py-3
+              text-white
+              text-xs
+              uppercase
+              tracking-[3px]
+              "
             >
               Quick View
             </button>
@@ -74,25 +125,55 @@ const ProductItem = ({ id, image, name, price }) => {
 
         </div>
 
-        {/* Content */}
+        {/* CONTENT */}
 
-        <div className="p-6">
+        <div className="p-4">
 
-          <h3 className="font-semibold text-lg text-zinc-900 line-clamp-1">
+          <h3
+            className="
+            text-sm
+            sm:text-base
+            font-semibold
+            text-zinc-900
+            line-clamp-2
+            min-h-[48px]
+            "
+          >
             {name}
           </h3>
 
-          <div className="flex items-center justify-between mt-4">
+          <div className="mt-3 flex items-center justify-between">
 
-            <p className="text-2xl font-bold">
-              {currency}
-              {price}
-            </p>
+            <div>
+
+              <p className="text-xl font-bold text-black">
+
+                {currency}
+                {price}
+
+              </p>
+
+              <p className="text-xs text-gray-400 mt-1">
+                Free Shipping
+              </p>
+
+            </div>
 
             <motion.button
-              whileTap={{ scale: .9 }}
-              whileHover={{ rotate: 90 }}
-              className="w-12 h-12 rounded-full bg-black text-white text-xl"
+              whileTap={{ scale: 0.9 }}
+              whileHover={{
+                rotate: 90,
+                scale: 1.05,
+              }}
+              className="
+              h-10
+              w-10
+              rounded-full
+              bg-black
+              text-white
+              text-xl
+              shadow-lg
+              "
             >
               +
             </motion.button>
@@ -100,6 +181,7 @@ const ProductItem = ({ id, image, name, price }) => {
           </div>
 
         </div>
+
       </Link>
     </motion.div>
   );

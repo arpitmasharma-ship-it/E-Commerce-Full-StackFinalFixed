@@ -41,9 +41,8 @@
 
 // export default LatestCollection
 
-
-
 import React, { useContext } from "react";
+import { motion } from "framer-motion";
 import { ShopContext } from "../context/ShopContext";
 import ProductItem from "./ProductItem";
 import Title from "./Title";
@@ -52,23 +51,59 @@ const LatestCollection = () => {
   const { products } = useContext(ShopContext);
 
   return (
-    <section className="py-24">
+<section className="pt-8 pb-10">
 
-      <Title text1="Premium" text2="Latest Collection" />
+      {/* Heading */}
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="text-center mb-10 sm:mb-14">
 
-        {products.slice(0,8).map((item)=>(
-          <ProductItem
-            key={item._id}
-            id={item._id}
-            image={item.image}
-            name={item.name}
-            price={item.price}
-          />
-        ))}
+        <Title text1="Premium" text2="Latest Collection" />
+
+        <p className="mt-4 max-w-2xl mx-auto px-4 text-gray-500 text-sm sm:text-base leading-7">
+          Discover our newest premium arrivals crafted with exceptional quality,
+          timeless style and unmatched comfort.
+        </p>
 
       </div>
+
+      {/* Products */}
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: .8 }}
+        className="
+          grid
+          grid-cols-2
+          md:grid-cols-3
+          lg:grid-cols-4
+          xl:grid-cols-4
+          gap-3
+          sm:gap-5
+          lg:gap-7
+        "
+      >
+        {products.slice(0, 8).map((item, index) => (
+          <motion.div
+            key={item._id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              delay: index * 0.08,
+              duration: 0.5,
+            }}
+          >
+            <ProductItem
+              id={item._id}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
 
     </section>
   );

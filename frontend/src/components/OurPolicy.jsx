@@ -43,82 +43,80 @@ const policies = [
   {
     icon: assets.exchange_icon,
     title: "Easy Exchange",
-    desc: "Enjoy a hassle-free exchange process with fast replacements and zero hidden charges.",
+    desc: "Fast and hassle-free exchanges.",
   },
   {
     icon: assets.quality_icon,
     title: "Premium Quality",
-    desc: "Every product is carefully crafted using premium materials for exceptional comfort.",
+    desc: "Crafted with premium materials.",
   },
   {
     icon: assets.support_img,
     title: "24/7 Support",
-    desc: "Our support team is always available to help you before and after every purchase.",
+    desc: "Always here whenever you need us.",
   },
 ];
 
 const OurPolicy = () => {
   return (
-    <section className="py-28">
+    <section className="py-12 sm:py-16">
 
-      <div className="text-center mb-16">
+      {/* Heading */}
 
-        <span className="uppercase tracking-[6px] text-gray-400 text-sm">
+      <div className="text-center mb-8">
+
+        <p className="uppercase tracking-[5px] text-xs text-gray-400">
           Why Choose Us
-        </span>
+        </p>
 
-        <h2 className="text-5xl font-black mt-4 text-zinc-900">
-          Premium Shopping Experience
+        <h2 className="mt-2 text-3xl sm:text-4xl font-black text-zinc-900">
+          Premium Shopping
         </h2>
 
-        <p className="mt-5 max-w-2xl mx-auto text-gray-500 leading-8">
-          We focus on quality, trust and customer satisfaction to provide
-          a world-class shopping experience.
+        <p className="mt-3 max-w-xl mx-auto text-sm sm:text-base text-gray-500">
+          Luxury shopping with quality products and trusted service.
         </p>
 
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      {/* Cards */}
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
         {policies.map((item, index) => (
 
           <motion.div
             key={index}
             whileHover={{
-              y: -10,
-              scale: 1.03,
+              y: -8,
             }}
             transition={{
-              duration: 0.35,
+              duration: 0.3,
             }}
-            className="group relative overflow-hidden rounded-[32px] bg-white border border-gray-200 shadow-lg hover:shadow-2xl p-10"
+            className="rounded-3xl bg-white border border-gray-200 shadow-md hover:shadow-xl p-6"
           >
 
-            {/* Background Glow */}
+            <div className="flex justify-center">
 
-            <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-black/5 blur-3xl opacity-0 group-hover:opacity-100 transition duration-500" />
-
-            <div className="relative">
-
-              <div className="flex items-center justify-center h-20 w-20 rounded-2xl bg-zinc-100 mb-8 mx-auto group-hover:bg-black transition duration-500">
+              <div className="h-14 w-14 rounded-2xl bg-zinc-100 flex items-center justify-center">
 
                 <img
                   src={item.icon}
                   alt=""
-                  className="w-10 transition duration-500 group-hover:invert"
+                  className="w-7"
                 />
 
               </div>
 
-              <h3 className="text-2xl font-bold text-center mb-4">
-                {item.title}
-              </h3>
-
-              <p className="text-center text-gray-500 leading-7">
-                {item.desc}
-              </p>
-
             </div>
+
+            <h3 className="text-lg font-bold text-center mt-5">
+              {item.title}
+            </h3>
+
+            <p className="text-center text-sm text-gray-500 mt-2 leading-6">
+              {item.desc}
+            </p>
 
           </motion.div>
 
