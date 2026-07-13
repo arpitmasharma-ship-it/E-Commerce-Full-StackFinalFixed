@@ -1,35 +1,76 @@
-import React from 'react'
-import { NavLink } from "react-router-dom"; // ✅ capital L
-import { assets } from '../assets/assets'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  PlusCircle,
+  ShoppingBag,
+  Package,
+  Settings,
+} from "lucide-react";
 
 const Sidebar = () => {
-    return (
+  const menu = [
+    {
+      name: "Dashboard",
+      icon: <LayoutDashboard size={20} />,
+      path: "/",
+    },
+    {
+      name: "Add Product",
+      icon: <PlusCircle size={20} />,
+      path: "/add",
+    },
+    {
+      name: "Products",
+      icon: <ShoppingBag size={20} />,
+      path: "/list",
+    },
+    {
+      name: "Orders",
+      icon: <Package size={20} />,
+      path: "/order",
+    },
+    {
+      name: "Settings",
+      icon: <Settings size={20} />,
+      path: "#",
+    },
+  ];
 
+  return (
+    <div className="w-72 min-h-screen bg-white border-r border-gray-200 shadow-sm">
 
-        ////// Navlink use kerna ka fayada ye hai ki ham active wali property ko0 use ker saktha hai okry 
-        
-        <div className='w-[18%] min-h-screen  border-r-2' >
-            <div className='flex flex-col gap-4 pt-6 pl-[20%] text-[15px]'>
-                <NavLink className='flex items-center gap-3 border  border-gray-300  border-r-0 px-3 py-2 rounded-l ' to={"/add"}  >
-                    <img className='w-5 h-5 ' src={assets.add_icon} alt="" />
-                    <p className='hidden md:block '>Add Items</p>
-                </NavLink>
+      <div className="p-6">
 
-                  <NavLink className='flex items-center gap-3 border  border-gray-300  border-r-0 px-3 py-2 rounded-l ' to={"/list"}  >
-                    <img className='w-5 h-5 ' src={assets.order_icon} alt="" />
-                    <p className='hidden md:block '>List Items</p>
-                </NavLink>
+        <p className="text-gray-400 uppercase text-xs tracking-[4px] mb-6">
+          Navigation
+        </p>
 
+        <div className="flex flex-col gap-3">
 
-                  <NavLink className='flex items-center gap-3 border  border-gray-300  border-r-0 px-3 py-2 rounded-l ' to={"/order"}  >
-                    <img className='w-5 h-5 ' src={assets.order_icon} alt="" />
-                    <p className='hidden md:block '>Orders</p>
-                </NavLink>
+          {menu.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 ${
+                  isActive
+                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                    : "hover:bg-indigo-50 text-gray-600"
+                }`
+              }
+            >
+              {item.icon}
 
+              <span className="font-medium">{item.name}</span>
+            </NavLink>
+          ))}
 
-            </div>
         </div>
-    )
-}
 
-export default Sidebar
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;
